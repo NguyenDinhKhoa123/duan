@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập</title>
+
+</head>
+
+<body>
+  <div class="box">
+    <h2>Đăng nhập</h2>
+    <input type="text" id="tendangnhap" placeholder="Tên đăng nhập"><br>
+    <input type="password" id="matkhau" placeholder="Mật khẩu"><br>
+    <button onclick="login()">Đăng Nhập</button>
+    <p id="message"></p>
+    <p>Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+  </div>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url("/agm/img/backgroundloginform1.webp");
+      background-size: cover;
+    }
+
+    .box {
+      background: transparent;
+
+      padding: 40px 50px;
+      border-radius: 10px;
+      backdrop-filter: blur(30px);
+      border: 2px solid rgba(116, 116, 116, 0.44);
+      box-shadow: -1px 1px 10px rgba(0, 0, 0, 0.726);
+    }
+
+    .box h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      text-align: center;
+      margin-bottom: 10px;
+      color: aliceblue;
+
+    }
+
+    .box input {
+      padding: 10px 30px;
+      margin: 4px 0;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .box button {
+      font-size: 15px;
+      padding: 10px 83px;
+      margin-top: 10px;
+      background-color: rgb(247, 175, 116);
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .box button:hover {
+      background-color: rgb(142, 96, 59);
+      color: white;
+    }
+
+    .box button:active {
+      background-color: rgb(247, 175, 116);
+      color: black;
+    }
+
+    .box p {
+      text-align: center;
+      padding-top: 10px;
+      font-size: 15px;
+      color: aliceblue;
+    }
+
+    .box a {
+      color: rgb(134, 134, 255);
+    }
+  </style>
+
+  <script>
+    function login() {
+      const username = document.getElementById("tendangnhap").value.trim();
+      const password = document.getElementById("matkhau").value;
+      const message = document.getElementById("message");
+
+      const savedPassword = localStorage.getItem(username);
+
+      if (!savedPassword) {
+        message.textContent = "Tài khoản không tồn tại.";
+        return;
+      }
+
+      if (password === savedPassword) {
+        message.style.color = "#90C67C";
+        message.textContent = "Đăng nhập thành công!";
+
+        // ✅ Lưu username vào localStorage để dùng ở trang khác
+        localStorage.setItem("loggedInUser", username);
+
+        setTimeout(() => {
+          window.location.href = "trangchu.html";
+        }, 1000);
+      } else {
+        message.textContent = "Sai mật khẩu.";
+      }
+    }
+
+  </script>
+</body>
+
+</html>
